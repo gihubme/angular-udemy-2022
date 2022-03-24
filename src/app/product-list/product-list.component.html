@@ -1,0 +1,39 @@
+<div class="product-list" xmlns="http://www.w3.org/1999/html">
+  <h3>{{productListName}}</h3>
+  <label>Update Product List Name</label>
+  <input type="text"
+       class="form-control"
+       (input)="onUpdateProductList($event)"
+  >
+  <hr>
+
+  <p>Product Creation Status:
+    <span style="font-weight: bold;"  [innerText]="allowNewProduct"></span> __ {{productCreationStatus}}
+  </p>
+  <button class="btn btn-primary" (click)="productCreationSwitch()">
+    {{(allowNewProduct)?"Disable Product Creation":"Enable Product Creation"}}
+  </button>
+
+
+  <hr>
+  <button class="btn btn-primary" [disabled]="!allowNewProduct" (click)="onProductCreation(inputProductName)">
+    Add Product
+  </button>
+  <br/>
+  <label>New Product Name</label>
+  <input type="text"
+         class="form-control"
+         [(ngModel)]="inputProductName"
+  >
+
+<!--  will overwrite productName from template-->
+  <app-product [innerText]="allowNewProduct"></app-product>
+
+<app-product  *ngFor="let item of products"></app-product>
+
+  <ul>
+    <li *ngFor="let item of products; index as i" [attr.data-index]="i">
+      {{i}}<app-product ></app-product>
+    </li>
+  </ul>
+</div>

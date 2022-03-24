@@ -1,0 +1,15 @@
+<p
+  *ngIf="productName === '' else productWithName"
+  [ngStyle]="{backgroundColor: getColor()}"
+>
+  product with no name!
+</p>
+<ng-template #productWithName>
+  <!--    use nameWithCapitals-class only if there are capitals-->
+  <p
+    [ngStyle]="{backgroundColor: getColor()}"
+    [ngClass]="{nameWithCapitals : productName.match('/[A-Z]/') }"
+  >
+    {{productName}}, product with name!
+  </p>
+</ng-template>
